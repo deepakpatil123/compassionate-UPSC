@@ -382,7 +382,6 @@ export default function PersonalDetailsForm({
           <Button
             sx={{
               marginTop: "20px",
-              backgroundColor: "red",
             }}
             type="submit"
             variant="contained"

@@ -9,29 +9,27 @@ import { useAuth } from "@/context/JWTContext/AuthContext.provider";
 const SidebarItems = ({ toggleMobileSidebar }: any) => {
   const pathname = usePathname();
   const pathDirect = pathname;
-  const auth:any = useAuth();
-  const [allData, setItems] = useState<any>([])
-  const role= auth?.user?.role?.name
+  const auth: any = useAuth();
+  const [allData, setItems] = useState<any>([]);
+  const role = auth?.user?.role?.name;
 
-  const dataManipulation = ()=>{
-    const sidebar:any = Menuitems.filter((el:any)=>el.present==="yes")
-    if(role==="Employee"){
-      setItems(sidebar)
+  const dataManipulation = () => {
+    const sidebar: any = Menuitems.filter((el: any) => el.present === "yes");
+    if (role === "Employee") {
+      setItems(sidebar);
+    } else {
+      setItems(Menuitems);
     }
-    else{
-      setItems(Menuitems)
-    }
-   
-  }
+  };
 
-  useEffect(()=>{
-    dataManipulation()
-  })
-  
+  useEffect(() => {
+    dataManipulation();
+  });
+
   return (
     <Box sx={{ px: 3 }}>
       <List sx={{ pt: 0 }} className="sidebarNav" component="div">
-        {allData.map((item:any) => {
+        {allData.map((item: any) => {
           // {/********SubHeader**********/}
           if (item.subheader) {
             return <NavGroup item={item} key={item.subheader} />;
