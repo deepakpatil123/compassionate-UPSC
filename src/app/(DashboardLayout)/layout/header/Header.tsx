@@ -16,7 +16,6 @@ import PropTypes from "prop-types";
 import Profile from "./Profile";
 import { IconBellRinging, IconMenu, IconTypography } from "@tabler/icons-react";
 import Image from "next/image";
-import Logo from "../../../../../public/Gov_Logo.png";
 
 interface ItemType {
   toggleMobileSidebar: (event: React.MouseEvent<HTMLElement>) => void;
@@ -57,16 +56,10 @@ const Header = ({ toggleMobileSidebar }: ItemType) => {
           <IconMenu width="20" height="20" />
         </IconButton>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Image height={50} width={45} src={Logo} alt=""></Image>
-          <Box ml={1}>
-            <Typography sx={{ fontWeight: "800" }}>
-              UNION PUBLIC SERVICE COMMISSION
-            </Typography>
-            <Typography sx={{ fontWeight: "800" }}>
-              संघ लोक सेवा आयोग
-            </Typography>
-          </Box>
+        <Box sx={{ margin: "20px 0" }} px={3}>
+          <Typography variant="h3" textAlign={"center"}>
+            Compassionate Appointment
+          </Typography>
         </Box>
 
         <Box flexGrow={1} />

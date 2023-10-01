@@ -6,6 +6,8 @@ export default function PersonalDetailsForm({
   onChange,
   formData1,
   setFormData1,
+  formData,
+  formData2,
 }: any) {
   //   const [formData1, setFormData] = useState({
   //    name: "",
@@ -62,6 +64,7 @@ export default function PersonalDetailsForm({
       console.log("Particular of Deceased Form Data:", formData1);
       handleNext();
       setFormData1(formData1);
+      localStorage.setItem("MultiForm2", JSON.stringify([formData1]));
     }
   };
 
@@ -90,7 +93,7 @@ export default function PersonalDetailsForm({
             }}
           >
             <TextField
-              name="?"
+              name="name1"
               label="Name"
               variant="outlined"
               fullWidth

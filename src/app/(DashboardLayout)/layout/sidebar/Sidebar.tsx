@@ -1,7 +1,7 @@
 import { useMediaQuery, Box, Drawer, Typography } from "@mui/material";
-import Logo from "../shared/logo/Logo";
 import SidebarItems from "./SidebarItems";
-import { Upgrade } from "./Updrade";
+import Logo from "../../../../../public/Gov_Logo.png";
+import Image from "next/image";
 
 interface ItemType {
   isMobileSidebarOpen: boolean;
@@ -51,10 +51,24 @@ const Sidebar = ({
             {/* ------------------------------------------- */}
             {/* Logo */}
             {/* ------------------------------------------- */}
-            <Box px={3}>
-              <Typography variant="h3" textAlign={"center"}>
-                Compassionate Appointment
-              </Typography>
+
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                padding: "20px 10px",
+                borderBottom: "2px solid #b4b4b44f",
+              }}
+            >
+              <Image height={50} width={45} src={Logo} alt=""></Image>
+              <Box ml={1}>
+                <Typography sx={{ fontWeight: "800", fontSize: "10px" }}>
+                  UNION PUBLIC SERVICE COMMISSION
+                </Typography>
+                <Typography sx={{ fontWeight: "800", fontSize: "10px" }}>
+                  संघ लोक सेवा आयोग
+                </Typography>
+              </Box>
             </Box>
             <Box>
               {/* ------------------------------------------- */}

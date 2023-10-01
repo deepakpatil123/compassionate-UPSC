@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField, Typography, Box, Container } from "@mui/material";
 
 export default function PersonalDetailsForm({
@@ -29,10 +29,6 @@ export default function PersonalDetailsForm({
       [name]: value,
     });
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
     // Clear the error message when the user starts typing again
     setErrors({
       ...errors,
@@ -63,6 +59,7 @@ export default function PersonalDetailsForm({
       console.log("Particular Form Data:", formData);
       handleNext();
       setFormData(formData);
+      localStorage.setItem("MultiForm1", JSON.stringify([formData]));
     }
   };
 

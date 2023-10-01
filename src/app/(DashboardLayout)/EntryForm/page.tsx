@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -15,7 +15,7 @@ import ScoringPForm from "../components/Forms/ScoringPForm";
 import Review from "../components/Forms/Review";
 
 export default function MultiStepForm() {
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
     "Particulars of Candidate",
@@ -30,14 +30,54 @@ export default function MultiStepForm() {
     relationship: "",
   });
   const [formData1, setFormData1] = useState({
-    name: "",
+    name1: "",
     designation: "",
     dod: "",
-    dob: "",
+    dob1: "",
   });
+  const [formData2, setFormData2] = useState({
+    familyPension: "",
+    parameter1: "",
+    terminalBenefit: "",
+    parameter2: "",
+    monthlyIncome: "",
+    parameter3: "",
+    movAndImmAss: "",
+    parameter4: "",
+    noOfDep: "",
+    noOfUnmarr: "",
+    noOfMinChildren: "",
+    unknown: "",
+    remark: "",
+  });
+
+  // if (typeof window === undefined) {
+  //   localStorage.setItem(
+  //     "MultiForm",
+  //     JSON.stringify([formData, formData1, formData2])
+  //   );
+  // }
+
+  const updateLocalStorage = () => {
+    localStorage.setItem(
+      "MultiForm",
+      JSON.stringify([formData, formData1, formData2])
+    );
+  };
+  useEffect(() => {
+    const storedData = localStorage.getItem("MultiForm");
+    if (storedData) {
+      const [storedFormData, storedFormData1, storedFormData2] =
+        JSON.parse(storedData);
+      setFormData(storedFormData);
+      setFormData1(storedFormData1);
+      setFormData2(storedFormData2);
+    }
+  }, []);
 
   const handleFormChange = (newFormData: any) => {
     setFormData(newFormData);
+    updateLocalStorage();
   };
 
   const getStepContent = (step: number) => {
@@ -49,12 +89,16 @@ export default function MultiStepForm() {
             setFormData={setFormData}
             handleNext={handleNext}
             onChange={handleFormChange}
+            formData1={formData1}
+            formData2={formData2}
           />
         );
       case 1:
         return (
           <ParticularOfDecForm
             formData1={formData1}
+            formData={formData}
+            formData2={formData2}
             setFormData1={setFormData1}
             handleNext={handleNext}
             onChange={handleFormChange}
@@ -63,14 +107,22 @@ export default function MultiStepForm() {
       case 2:
         return (
           <ScoringPForm
+            formData2={formData2}
             formData1={formData1}
-            setFormData1={setFormData1}
+            formData={formData}
+            setFormData2={setFormData2}
             handleNext={handleNext}
             onChange={handleFormChange}
           />
         );
       case 3:
-        return <Review />;
+        return (
+          <Review
+            formData={formData}
+            formData1={formData1}
+            formData2={formData2}
+          />
+        );
       default:
         return "Unknown step";
     }
