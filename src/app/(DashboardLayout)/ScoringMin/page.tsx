@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import { styled } from "@mui/material/styles";
 
 interface EmployeeData {
   srNo: number;
@@ -96,6 +98,28 @@ const dummyData: EmployeeData[] = [
   // Add more rows as needed
 ];
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+  border: "1px solid black",
+  padding: "5px",
+}));
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+  border: "1px solid black",
+}));
+
 const EmployeeTable: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -136,75 +160,119 @@ const EmployeeTable: React.FC = () => {
         <Table aria-label="Employee Table">
           <TableHead>
             <TableRow>
-              <TableCell>Sr No.</TableCell>
-              <TableCell>Details of Decreased Employee</TableCell>
-              <TableCell>Details of Applicant</TableCell>
-              <TableCell>Reg No.</TableCell>
-              <TableCell>Family Pension</TableCell>
-              <TableCell>Terminal Benefits</TableCell>
-              <TableCell>No. of Dependents</TableCell>
-              <TableCell>No. of Unmarried Daughters</TableCell>
-              <TableCell>No. of Minor Children</TableCell>
-              <TableCell>Monthly Income</TableCell>
-              <TableCell>Movable/Immovable Assets</TableCell>
-              <TableCell>Left Over Service</TableCell>
-              <TableCell>Age of Case</TableCell>
-              <TableCell>Total Points</TableCell>
-              <TableCell>Edit</TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Sr No.
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Details of Decreased Employee
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Details of Applicant
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Reg No.
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Family Pension
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Terminal Benefits
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                No. of Dependents
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                No. of Unmarried Daughters
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                No. of Minor Children
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Monthly Income
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Movable/Immovable Assets
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Left Over Service
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Age of Case
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Total Points
+              </TableCell>
+              <TableCell sx={{ border: "1px solid black", fontWeight: "bold" }}>
+                Edit
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredData.map((row) => (
-              <TableRow key={row.srNo}>
-                <TableCell>
+              <TableRow sx={{ width: "400px" }} key={row.srNo}>
+                <StyledTableCell
+                  sx={{
+                    textAlign: "center",
+                  }}
+                >
                   {row.srNo}
-                  <Button variant="contained" color="success">
+                  <Button
+                    sx={{ margin: "10px 0" }}
+                    variant="contained"
+                    color="success"
+                  >
                     Disposed
                   </Button>
-                  <Button variant="contained" color="primary">
-                    CArry Fwd
+                  <Button
+                    sx={{ margin: "10px 0" }}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Carry Fwd
                   </Button>
-                </TableCell>
-                <TableCell>
-                  <Table>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Table sx={{ width: "300px" }}>
                     <TableBody>
                       {row.detailsOfDecreasedEmployee.map((item, index) => (
                         <TableRow key={index}>
-                          <TableCell>{item.column1}</TableCell>
-                          <TableCell>{item.column2}</TableCell>
+                          <StyledTableCell>{item.column1}</StyledTableCell>
+                          <StyledTableCell>{item.column2}</StyledTableCell>
                         </TableRow>
                       ))}
                     </TableBody>
                   </Table>
-                </TableCell>
-                <TableCell>
-                  <Table>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Table sx={{ width: "300px" }}>
                     <TableBody>
                       {row.detailsOfApplicant.map((item, index) => (
                         <TableRow key={index}>
-                          <TableCell>{item.column1}</TableCell>
-                          <TableCell>{item.column2}</TableCell>
+                          <StyledTableCell>{item.column1}</StyledTableCell>
+                          <StyledTableCell>{item.column2}</StyledTableCell>
                         </TableRow>
                       ))}
                     </TableBody>
                   </Table>
-                </TableCell>
-                <TableCell>{row.regNo}</TableCell>
-                <TableCell>{row.familyPension}</TableCell>
-                <TableCell>{row.terminalBenefits}</TableCell>
-                <TableCell>{row.numberOfDependents}</TableCell>
-                <TableCell>{row.numberOfUnmarriedDaughters}</TableCell>
-                <TableCell>{row.numberOfMinorChildren}</TableCell>
-                <TableCell>{row.monthlyIncome}</TableCell>
-                <TableCell>{row.movableImmovableAssets}</TableCell>
-                <TableCell>{row.leftOverService}</TableCell>
-                <TableCell>{row.ageOfCase}</TableCell>
-                <TableCell>{row.totalPoints}</TableCell>
-                <TableCell>
+                </StyledTableCell>
+                <StyledTableCell>{row.regNo}</StyledTableCell>
+                <StyledTableCell>{row.familyPension}</StyledTableCell>
+                <StyledTableCell>{row.terminalBenefits}</StyledTableCell>
+                <StyledTableCell>{row.numberOfDependents}</StyledTableCell>
+                <StyledTableCell>
+                  {row.numberOfUnmarriedDaughters}
+                </StyledTableCell>
+                <StyledTableCell>{row.numberOfMinorChildren}</StyledTableCell>
+                <StyledTableCell>{row.monthlyIncome}</StyledTableCell>
+                <StyledTableCell>{row.movableImmovableAssets}</StyledTableCell>
+                <StyledTableCell>{row.leftOverService}</StyledTableCell>
+                <StyledTableCell>{row.ageOfCase}</StyledTableCell>
+                <StyledTableCell>{row.totalPoints}</StyledTableCell>
+                <StyledTableCell>
                   <Button variant="contained" color="success">
                     Edit
                   </Button>
-                </TableCell>
+                </StyledTableCell>
               </TableRow>
             ))}
           </TableBody>

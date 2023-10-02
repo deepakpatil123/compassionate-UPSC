@@ -192,14 +192,14 @@ const EmployeeTable: React.FC = () => {
                   <Table sx={{ width: "300px" }}>
                     <TableBody>
                       {row.detailsOfDecreasedEmployee.map((item, index) => (
-                        <StyledTableRow key={index}>
+                        <TableRow key={index}>
                           <StyledTableCell width="100px">
                             {item.column1}
                           </StyledTableCell>
                           <StyledTableCell width="250px">
                             {item.column2}
                           </StyledTableCell>
-                        </StyledTableRow>
+                        </TableRow>
                       ))}
                     </TableBody>
                   </Table>
@@ -209,14 +209,14 @@ const EmployeeTable: React.FC = () => {
                   <Table sx={{ width: "300px" }}>
                     <TableBody>
                       {row.detailsOfApplicant.map((item, index) => (
-                        <StyledTableRow key={index}>
+                        <TableRow key={index}>
                           <StyledTableCell width="100px">
                             {item.column1}
                           </StyledTableCell>
                           <StyledTableCell width="250px">
                             {item.column2}
                           </StyledTableCell>
-                        </StyledTableRow>
+                        </TableRow>
                       ))}
                     </TableBody>
                   </Table>
